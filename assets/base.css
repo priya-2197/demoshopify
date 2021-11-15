@@ -1783,6 +1783,7 @@ input[type='checkbox'] {
   width: 100%;
   padding: 1rem 2rem;
   text-decoration: none;
+  color: aliceblue !important;
 }
 
 .announcement-bar__link:hover {
@@ -1807,6 +1808,7 @@ input[type='checkbox'] {
   padding: 1rem 2rem;
   margin: 0;
   letter-spacing: 0.1rem;
+  color: aliceblue;
 }
 
 /* section-header */
