@@ -114,6 +114,7 @@
       {%- else -%}
         <div class="card__content">
           <h2 class="card__text h3">
+           
             <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
       <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
         <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
@@ -123,6 +124,7 @@
         </div>
       </div>
     </modal-dialog>
+            
            <!-- <a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
               {{ product_card_product.title }}
             </a>-->
