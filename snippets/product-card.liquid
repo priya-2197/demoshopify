@@ -13,24 +13,7 @@
     Usage:
     {% render 'product-card', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
-{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-rte.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
-{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 
-<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
-
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-
-{%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
-{%- if first_3d_model -%}
-  {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
-  <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
-  <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 
 <div class="card-wrapper">
@@ -131,25 +114,11 @@
       {%- else -%}
         <div class="card__content">
           <h2 class="card__text h3">
-            <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
-                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog"> {{ product_card_product.title }}</button>
-              </modal-opener>
-              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
-         
+            <a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
+              {{ product_card_product.title }}
+            </a>
           </h2>
         </div>
-       <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-      <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-        <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-        <div class="product-popup-modal__content-info">
-          <h1 class="h2">{{ product_card_product.title }}</h1>
-          {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
-         <div class="product__description rte">
-                {{ product.description }}
-              </div>
-        </div>
-      </div>
-    </modal-dialog>
       {%- endif -%}
 
       <div class="card__badge">
@@ -162,40 +131,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  class ProductModal extends ModalDialog {
-    constructor() {
-      super();
-    }
-
-    hide() {
-      super.hide();
-    }
-
-    show(opener) {
-      super.show(opener);
-      this.showActiveMedia();
-    }
-
-    showActiveMedia() {
-      this.querySelectorAll(`[data-media-id]:not([data-media-id="${this.openedBy.getAttribute("data-media-id")}"])`).forEach((element) => {
-          element.classList.remove('active');
-        }
-      )
-      const activeMedia = this.querySelector(`[data-media-id="${this.openedBy.getAttribute("data-media-id")}"]`);
-      const activeMediaTemplate = activeMedia.querySelector('template');
-      const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null;
-      activeMedia.classList.add('active');
-      activeMedia.scrollIntoView();
-
-      const container = this.querySelector('[role="document"]');
-      container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
-
-      if (activeMedia.nodeName == 'DEFERRED-MEDIA' && activeMediaContent && activeMediaContent.querySelector('.js-youtube'))
-        activeMedia.loadContent();
-    }
-  }
-
-  customElements.define('product-modal', ProductModal);
-</script>
