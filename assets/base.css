@@ -1775,7 +1775,7 @@ input[type='checkbox'] {
 .announcement-bar {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   color: rgb(var(--color-foreground));
-  background-color: rgb(250, 241, 241) !important;
+  background-color: rgb(0, 0, 0) !important;
 }
 
 .announcement-bar__link {
@@ -1808,7 +1808,7 @@ input[type='checkbox'] {
   padding: 1rem 4rem;
   margin: 0;
   letter-spacing: 0.1rem;
-  color:black;
+  color:rgb(240, 235, 235);
 }
 
 /* section-header */
