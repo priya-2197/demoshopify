@@ -114,20 +114,9 @@
       {%- else -%}
         <div class="card__content">
           <h2 class="card__text h3">
-           
-            <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-      <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
-        <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
-        <div class="product-popup-modal__content-info">
-          <h1 class="h2">{{ product_card_product.title }}</h1>
-          {{ block.settings.page.content }}
-        </div>
-      </div>
-    </modal-dialog>
-            
-           <!-- <a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
+            <a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
               {{ product_card_product.title }}
-            </a>-->
+            </a>
           </h2>
         </div>
       {%- endif -%}
@@ -142,39 +131,3 @@
     </div>
   </div>
 </div>
-<script>
-  class ProductModal extends ModalDialog {
-    constructor() {
-      super();
-    }
-
-    hide() {
-      super.hide();
-    }
-
-    show(opener) {
-      super.show(opener);
-      this.showActiveMedia();
-    }
-
-    showActiveMedia() {
-      this.querySelectorAll(`[data-media-id]:not([data-media-id="${this.openedBy.getAttribute("data-media-id")}"])`).forEach((element) => {
-          element.classList.remove('active');
-        }
-      )
-      const activeMedia = this.querySelector(`[data-media-id="${this.openedBy.getAttribute("data-media-id")}"]`);
-      const activeMediaTemplate = activeMedia.querySelector('template');
-      const activeMediaContent = activeMediaTemplate ? activeMediaTemplate.content : null;
-      activeMedia.classList.add('active');
-      activeMedia.scrollIntoView();
-
-      const container = this.querySelector('[role="document"]');
-      container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
-
-      if (activeMedia.nodeName == 'DEFERRED-MEDIA' && activeMediaContent && activeMediaContent.querySelector('.js-youtube'))
-        activeMedia.loadContent();
-    }
-  }
-
-  customElements.define('product-modal', ProductModal);
-</script>
