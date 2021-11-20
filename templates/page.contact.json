@@ -1,5 +1,40 @@
 {
   "sections": {
+    "16374258670748fa0f": {
+      "type": "image-with-text",
+      "blocks": {
+        "16374258677d699c5e-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text"
+          }
+        },
+        "16374258677d699c5e-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
+        },
+        "16374258677d699c5e-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "16374258677d699c5e-0",
+        "16374258677d699c5e-1",
+        "16374258677d699c5e-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/person-stands-on-rocks-poking-out-of-the-ocean-shoreline.jpg",
+        "height": "adapt",
+        "color_scheme": "background-1",
+        "layout": "image_first"
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -121,6 +156,7 @@
     }
   },
   "order": [
+    "16374258670748fa0f",
     "main",
     "163704290224046d22",
     "1637042909199a9e53",
